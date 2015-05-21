@@ -13,7 +13,7 @@ public abstract class Player {
 	protected SpriteSheet sheet;
 	protected Image image;
 	protected Animation moveRightAnim, moveLeftAnim, moveDownAnim, moveUpAnim;
-	private static final double WALKSPEED = 0.1;
+	private static double WALKSPEED = 0.5;
 
 	public Player(String name, int x, int y){
 		this.name = name;
@@ -41,12 +41,27 @@ public abstract class Player {
 	public Image getImage(){
 		return image;
 	}
+	public double getSpeed(){
+		return WALKSPEED;
+	}
 	
 	public float getX(){
 		return x;
 	}
+	public int getHealth(){
+		return health;
+	}
+	public int getMaxHealth(){
+		return maxHealth;
+	}
+	public void setSpeed(double speed){
+		WALKSPEED = speed;
+	}
 	public float getY(){
 		return y;
+	}
+	public void setHealth(int health){
+		this.health = health;
 	}
 	public Animation getAnimation(){
 		return moveRightAnim;

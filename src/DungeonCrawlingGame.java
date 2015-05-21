@@ -10,7 +10,7 @@ public class DungeonCrawlingGame extends StateBasedGame {
 	public static void main(String[] args) throws SlickException  {
 		DungeonCrawlingGame game = new DungeonCrawlingGame("Dungeon Crawling Game");
 		AppGameContainer app = new AppGameContainer(game);
-		app.setDisplayMode(app.getScreenWidth()/2,app.getScreenHeight()/2,false);
+		app.setDisplayMode(app.getScreenWidth(),app.getScreenHeight(),true);
 		app.start();
 		
 	}
