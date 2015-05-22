@@ -5,7 +5,7 @@ import org.newdawn.slick.Image;
 
 public class Warrior extends Player {
 
-	private Image[] moveRightImages = new Image[5];
+
 	public Warrior(String name, int x, int y) throws SlickException {
 		super(name, x, y);
 		sheet = new SpriteSheet("res/warriorsheet.png",30,30);

@@ -13,7 +13,7 @@ public abstract class Player {
 	protected SpriteSheet sheet;
 	protected Image image;
 	protected Animation moveRightAnim, moveLeftAnim, moveDownAnim, moveUpAnim;
-	private static double WALKSPEED = 0.5;
+	private static double WALKSPEED = 0.003;
 
 	public Player(String name, int x, int y){
 		this.name = name;
