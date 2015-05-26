@@ -14,16 +14,18 @@ public class GameState extends BasicGameState {
 	private Player player;
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		player = new Warrior("Tresdon",gc.getWidth()/2,gc.getWidth()/2);
+		player = new Warrior("Tresdon",200,200);
 		//Music music = new Music("res/music.ogg");
-		dungeon = new TiledMap("res/dungeon.tmx");
+		dungeon = new TiledMap("res/dungeon-one.tmx");
 		//music.play();
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)	throws SlickException {
-		dungeon.render(0,0,(int)player.getX()-gc.getWidth()/2,(int)player.getY()-gc.getWidth()/2,40,30);
-		player.getAnimation().draw(gc.getWidth()/2,gc.getHeight()/2);
+		dungeon.render(0,0);
+		player.getAnimation().draw(player.getX(),player.getY());
+		g.drawString("X: "+player.getX(), 200, 150);
+		g.drawString("Y: "+player.getY(), 200, 200);
 
 	}
 
@@ -31,28 +33,27 @@ public class GameState extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input keyboard = gc.getInput();
 		int wallLayer = dungeon.getLayerIndex("wall");;
-		int bgLayer = dungeon.getLayerIndex("background");
 		if(keyboard.isKeyPressed(Input.KEY_ESCAPE)){
 			gc.exit();
 		}
 		try{
 			if(keyboard.isKeyDown(Input.KEY_W)){
-				if(dungeon.getTileId(((int)player.getX()/50),((int)player.getY()/50)-1,bgLayer)==1){
+				if(dungeon.getTileId(((int)player.getX()/50),((int)player.getY()/50)-1,wallLayer)==0){
 					player.moveUp();
 				}
 			}
-			if(keyboard.isKeyDown(Input.KEY_A)){
-				if(dungeon.getTileId(((int)player.getX()/50)-1,(int)player.getY()/50,bgLayer)==1){
+			else if(keyboard.isKeyDown(Input.KEY_A)){
+				if(dungeon.getTileId(((int)player.getX()/50)-1,(int)player.getY()/50,wallLayer)==0){
 					player.moveLeft();
 				}	
 			}
-			if(keyboard.isKeyDown(Input.KEY_S)){
-				if(dungeon.getTileId((int)player.getX()/50,((int)player.getY())/50+1,bgLayer)==1){
+			else if(keyboard.isKeyDown(Input.KEY_S)){
+				if(dungeon.getTileId((int)player.getX()/50,((int)player.getY())/50+1,wallLayer)==0){
 					player.moveDown();
 				}		
 			}
-			if(keyboard.isKeyDown(Input.KEY_D)){
-				if(dungeon.getTileId(((int)player.getX()/50)+1,(int)player.getY()/50,bgLayer)==1){
+			else if(keyboard.isKeyDown(Input.KEY_D)){
+				if(dungeon.getTileId(((int)player.getX()/50)+1,(int)player.getY()/50,wallLayer)==0){
 					player.moveRight();
 				}		
 			}
@@ -66,6 +67,18 @@ public class GameState extends BasicGameState {
 	@Override
 	public int getID() {
 		return 1;
+	}
+	public void movePlayerRight(){
+		player.moveRight();
+	}
+	public void movePlayerLeft(){
+		player.moveLeft();
+	}
+	public void movePlayerDown(){
+		player.moveDown();
+	}
+	public void movePlayerUp(){
+		player.moveUp();
 	}
 
 }
