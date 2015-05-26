@@ -9,16 +9,18 @@ public abstract class Player {
 
 	private String name;
 	private int health, maxHealth;
-	private float x,y;
+	private int x,y;
 	protected SpriteSheet sheet;
 	protected Image image;
 	protected Animation moveRightAnim, moveLeftAnim, moveDownAnim, moveUpAnim;
-	private static double WALKSPEED = .1;
+	private static double WALKSPEED = 50;
 
 	public Player(String name, int x, int y){
 		this.name = name;
 		this.x = x;
 		this.y = y;
+		health = 20;
+		maxHealth = 100;
 	}
 
 	public void attack(){
@@ -45,7 +47,7 @@ public abstract class Player {
 		return WALKSPEED;
 	}
 	
-	public float getX(){
+	public int getX(){
 		return x;
 	}
 	public int getHealth(){
@@ -57,7 +59,7 @@ public abstract class Player {
 	public void setSpeed(double speed){
 		WALKSPEED = speed;
 	}
-	public float getY(){
+	public int getY(){
 		return y;
 	}
 	public void setHealth(int health){
