@@ -11,7 +11,10 @@ public class DungeonCrawlingGame extends StateBasedGame {
 		DungeonCrawlingGame game = new DungeonCrawlingGame("Dungeon Crawling Game");
 		AppGameContainer app = new AppGameContainer(game);
 		app.setDisplayMode(app.getScreenWidth(),app.getScreenHeight(),true);
+		app.setIcon("res/icons/32x32.png");
 		app.start();
+
+		
 		
 	}
 

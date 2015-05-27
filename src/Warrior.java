@@ -6,34 +6,27 @@ import org.newdawn.slick.Image;
 public class Warrior extends Player {
 
 
-	public Warrior(String name, int x, int y) throws SlickException {
-		super(name, x, y);
-		sheet = new SpriteSheet("res/warriorsheet.png",30,30);
-		image = sheet.getSubImage(0,0);
-		moveRightAnim = new Animation();
-		for(int i= 0;i<5;i++){
-			moveRightAnim.addFrame(sheet.getSubImage(i,1),220);
-		}
-		
+	public Warrior(int x, int y) throws SlickException {
+		super(x, y);
+	
 	}
 
 	public void moveRight(){
 		super.moveRight();
-		moveRightAnim.start();
-		image = moveRightAnim.getCurrentFrame();
+		animation.start();
 	}
 	public void moveLeft(){
 		super.moveLeft();
+		animation.stop();
 	}
 	public void moveUp(){
 		super.moveUp();
 	}
 	public void moveDown(){
 		super.moveDown();
-		image = sheet.getSubImage(2, 4);
 	}
 	public Animation getAnimation(){
-		return moveRightAnim;
+		return animation;
 	}
 
 

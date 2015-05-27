@@ -7,20 +7,20 @@ import org.newdawn.slick.SpriteSheet;
 
 public abstract class Player {
 
-	private String name;
 	private int health, maxHealth;
 	private int x,y;
-	protected SpriteSheet sheet;
-	protected Image image;
-	protected Animation moveRightAnim, moveLeftAnim, moveDownAnim, moveUpAnim;
+	protected Animation moveRightAnim, moveLeftAnim, moveDownAnim, moveUpAnim, animation;
+	protected Image idle, rightIdle, downIdle, upIdle, leftIdle;
+	protected String facing;
+	private boolean walking=false;
 	private static double WALKSPEED = 50;
 
-	public Player(String name, int x, int y){
-		this.name = name;
+	public Player(int x, int y){
 		this.x = x;
 		this.y = y;
-		health = 20;
+		health = 100;
 		maxHealth = 100;
+		walking = false;
 	}
 
 	public void attack(){
@@ -28,21 +28,32 @@ public abstract class Player {
 	}
 
 	public void moveRight(){
+		walking = true;
 		x+=WALKSPEED;
+		animation = moveRightAnim;
+		idle = rightIdle;
 	}
 	public void moveLeft(){
+		walking = true;
 		x-=WALKSPEED;
+		animation = moveLeftAnim;
+		idle = leftIdle;
 	}
 	public void moveDown(){
+		walking = true;
 		y+=WALKSPEED;
+		animation = moveDownAnim;
+		idle = downIdle;
+
 	}
 	public void moveUp(){
+		walking = true;
 		y-=WALKSPEED;
+		animation = moveUpAnim;
+		idle = upIdle;
 	}
 	
-	public Image getImage(){
-		return image;
-	}
+
 	public double getSpeed(){
 		return WALKSPEED;
 	}
@@ -66,7 +77,16 @@ public abstract class Player {
 		this.health = health;
 	}
 	public Animation getAnimation(){
-		return moveRightAnim;
+		return animation;
+	}
+	public Image getImage(){
+		return idle;
+	}
+	public boolean isWalking(){
+		return walking;
+	}
+	public void setWalking(boolean val){
+		walking = val;
 	}
 
 

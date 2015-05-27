@@ -16,20 +16,27 @@ public class GameState extends BasicGameState {
 	private Camera camera;
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		player = new Warrior("Tresdon",200,200);
-		//Music music = new Music("res/music.ogg");
 		dungeon = new TiledMap("res/dungeon-one.tmx");
-		//music.play();
-		camera = new Camera(player.getX()+250,player.getY());
+		Music music = new Music("res/music.ogg");
+		music.play();
+		music.setVolume((float)0.3);
+		camera = new Camera(100,300);
+		player = new Archer(900,800);
+
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)	throws SlickException {
 		g.translate(camera.getX(), camera.getY());
 		dungeon.render(0,0);
-		player.getAnimation().draw(player.getX(),player.getY());
+		if(player.isWalking()){
+			player.getAnimation().draw(player.getX(),player.getY(),50,50);
+		}
+		else{
+			player.getImage().draw(player.getX(),player.getY(),50,50);
+		}
 		g.setColor(Color.black);
-		g.fillRect(player.getX()-100, player.getY()+320, player.getMaxHealth()*3, 50);
+		g.fillRect(player.getX()-32, player.getY()-20, player.getMaxHealth(), 20);
 		if(player.getHealth()>=player.getMaxHealth()/3*2){
 			g.setColor(Color.green);
 		}
@@ -39,13 +46,14 @@ public class GameState extends BasicGameState {
 		else{
 			g.setColor(Color.red);
 		}
-		g.fillRect(player.getX()-100, player.getY()+320, player.getHealth()*3, 50);
+		g.fillRect(player.getX()-32, player.getY()-20, player.getHealth(),20);
 
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input keyboard = gc.getInput();
+		keyboard.enableKeyRepeat();
 		int wallLayer = dungeon.getLayerIndex("wall");;
 		if(keyboard.isKeyPressed(Input.KEY_ESCAPE)){
 			gc.exit();
@@ -75,11 +83,12 @@ public class GameState extends BasicGameState {
 					camera.moveRight();
 				}		
 			}
+			else{
+			}
 		}
 		catch(Exception e){
 
 		}
-
 	}
 
 	@Override
