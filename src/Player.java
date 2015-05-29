@@ -1,48 +1,51 @@
-import java.util.ArrayList;
-
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.SlickException;
 
 
 public abstract class Player {
 
-	private int health, maxHealth;
+	private double health, maxHealth;
 	private int x,y;
 	protected Animation moveRightAnim, moveLeftAnim, moveDownAnim, moveUpAnim, animation;
 	protected Image idle, rightIdle, downIdle, upIdle, leftIdle;
-	protected String facing;
+	protected String direction;
 	private boolean walking=false;
-	private static double WALKSPEED = 50;
+	private static int WALKSPEED = 50;
 
 	public Player(int x, int y){
 		this.x = x;
 		this.y = y;
-		health = 100;
+		health = 30;
 		maxHealth = 100;
 		walking = false;
+		direction = "right";
 	}
 
-	public void attack(){
-		
+	public Projectile attack() throws SlickException{
+		Projectile proj = new Projectile(x,y,direction);
+		return proj;
 	}
 
 	public void moveRight(){
 		walking = true;
 		x+=WALKSPEED;
 		animation = moveRightAnim;
+		direction = "right";
 		idle = rightIdle;
 	}
 	public void moveLeft(){
 		walking = true;
 		x-=WALKSPEED;
 		animation = moveLeftAnim;
+		direction = "left";
 		idle = leftIdle;
 	}
 	public void moveDown(){
 		walking = true;
 		y+=WALKSPEED;
 		animation = moveDownAnim;
+		direction = "down";
 		idle = downIdle;
 
 	}
@@ -50,31 +53,21 @@ public abstract class Player {
 		walking = true;
 		y-=WALKSPEED;
 		animation = moveUpAnim;
+		direction = "up";
 		idle = upIdle;
-	}
-	
-
-	public double getSpeed(){
-		return WALKSPEED;
 	}
 	
 	public int getX(){
 		return x;
 	}
-	public int getHealth(){
+	public double getHealth(){
 		return health;
 	}
-	public int getMaxHealth(){
+	public double getMaxHealth(){
 		return maxHealth;
-	}
-	public void setSpeed(double speed){
-		WALKSPEED = speed;
 	}
 	public int getY(){
 		return y;
-	}
-	public void setHealth(int health){
-		this.health = health;
 	}
 	public Animation getAnimation(){
 		return animation;
@@ -84,6 +77,12 @@ public abstract class Player {
 	}
 	public boolean isWalking(){
 		return walking;
+	}
+	
+	public void heal(){
+		if(health<maxHealth){
+			health += .1;
+		}
 	}
 	public void setWalking(boolean val){
 		walking = val;

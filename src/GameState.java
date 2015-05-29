@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -11,17 +14,26 @@ import org.newdawn.slick.tiled.TiledMap;
 
 public class GameState extends BasicGameState {
 
-	private TiledMap dungeon;
+	public static TiledMap dungeon;
 	private Player player;
 	private Camera camera;
+	private ArrayList<Skeleton> enemies;
+	private ArrayList<Projectile> projectiles;
+	private Skeleton skelly;
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		dungeon = new TiledMap("res/dungeon-one.tmx");
-		Music music = new Music("res/music.ogg");
-		music.play();
-		music.setVolume((float)0.3);
+		//Music music = new Music("res/music.ogg");
+		//music.play();
+		//music.setVolume((float)0.3);
 		camera = new Camera(100,300);
 		player = new Archer(900,800);
+		enemies = new ArrayList<Skeleton>();
+		projectiles = new ArrayList<Projectile>();
+		//		for(int i =1 ; i<10 ; i++){
+		//			enemies.add(new Skeleton(i*300,i*500));
+		//		}
+		skelly = new Skeleton(1000,800);
 
 	}
 
@@ -35,8 +47,16 @@ public class GameState extends BasicGameState {
 		else{
 			player.getImage().draw(player.getX(),player.getY(),50,50);
 		}
+
+		skelly.getAnimation().draw(skelly.getX(),skelly.getY(),50,50);
+		//		for(Enemy enemy: enemies){
+		//			enemy.getAnimation().draw(enemy.getX(),enemy.getY(),50,50);
+		//		}
+
+		//DRAW HEALTH BARS
 		g.setColor(Color.black);
-		g.fillRect(player.getX()-32, player.getY()-20, player.getMaxHealth(), 20);
+		g.fillRect(player.getX()-32, player.getY()-20, (int)player.getMaxHealth(), 20);
+
 		if(player.getHealth()>=player.getMaxHealth()/3*2){
 			g.setColor(Color.green);
 		}
@@ -46,7 +66,15 @@ public class GameState extends BasicGameState {
 		else{
 			g.setColor(Color.red);
 		}
-		g.fillRect(player.getX()-32, player.getY()-20, player.getHealth(),20);
+		g.fillRect(player.getX()-32, player.getY()-20, (int)player.getHealth(),20);
+
+		for(int i = 0; i < projectiles.size(); i++){
+			Projectile temp = projectiles.get(i);
+			for(int j =0;j<40;j++){
+				temp.shoot();
+				temp.getImage().draw((float)temp.getX(),(float)temp.getY());
+			}
+		}
 
 	}
 
@@ -54,10 +82,18 @@ public class GameState extends BasicGameState {
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		Input keyboard = gc.getInput();
 		keyboard.enableKeyRepeat();
-		int wallLayer = dungeon.getLayerIndex("wall");;
+		int wallLayer = dungeon.getLayerIndex("wall");
+		int healthLayer = dungeon.getLayerIndex("health");
 		if(keyboard.isKeyPressed(Input.KEY_ESCAPE)){
 			gc.exit();
 		}
+		if(keyboard.isKeyPressed(Input.KEY_SPACE)){
+			projectiles.add(player.attack());
+		}
+		//		for(int i = 0;i<enemies.size();i++){
+		//			enemies.get(i).randomMovement();
+		//		}
+		skelly.randomMovement();
 		try{
 			if(keyboard.isKeyPressed(Input.KEY_W)){
 				if(dungeon.getTileId(((int)player.getX()/50),((int)player.getY()/50)-1,wallLayer)==0){
@@ -89,12 +125,15 @@ public class GameState extends BasicGameState {
 		catch(Exception e){
 
 		}
+		if(!(dungeon.getTileId((int)player.getX()/50, (int)player.getY()/50, healthLayer)==0)){
+			player.heal();
+		}
 	}
 
 	@Override
 	public int getID() {
 		return 1;
 	}
-	
+
 
 }
