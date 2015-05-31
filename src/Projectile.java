@@ -6,7 +6,7 @@ public class Projectile {
 	private double myX;
 	private double myY;
 	private String direction;
-	private static double mySpeed=.01;
+	private static double mySpeed=.02;
 	private Image image;
 	private boolean isVisible;
 
@@ -25,8 +25,16 @@ public class Projectile {
 	}
 
 	public boolean hitPlayer(Player aPlayer){
-		if(myX >= aPlayer.getX() - 25 && myX <= aPlayer.getX() + 25){
-			if(myY <= aPlayer.getY() + 25 && myY >= aPlayer.getY() - 25){
+		if(myX >= aPlayer.getX() - 1 && myX <= aPlayer.getX() + 1){
+			if(myY <= aPlayer.getY() + 1 && myY >= aPlayer.getY() - 1){
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean hitEnemy(Enemy enemy){
+		if(myX >= enemy.getX() - 25 && myX <= enemy.getX() + 25){
+			if(myY <= enemy.getY() + 25 && myY >= enemy.getY() - 25){
 				return true;
 			}
 		}

@@ -12,11 +12,13 @@ public class Enemy {
 						shootRightAnim, shootLeftAnim, shootDownAnim, shootUpAnim;
 	private static int WALKSPEED = 50;
 	private String direction="right";
+	private Random rand;
 	public Enemy(int x,int y){
 		this.x=x;
 		this.y=y;
 		health = 15;
 		maxHealth = 15;
+		rand = new Random();
 	}
 	public Projectile attack() throws SlickException{
 			Projectile proj = new Projectile(x,y,direction);
@@ -60,8 +62,8 @@ public class Enemy {
 		return animation;
 	}
 
-	public void randomMovement(){
-		Random rand = new Random();
+	public void randomMovement() {
+	
 		int num = rand.nextInt(1000);
 		if(num==1){
 			checkRight(GameState.dungeon);
@@ -75,6 +77,11 @@ public class Enemy {
 		if(num==4){
 			checkDown(GameState.dungeon);
 		}
+	}
+	public int randomAttack() throws SlickException{
+		int num = rand.nextInt(1000);
+		return num;
+	
 	}
 	public static Enemy factory(int x, int y){
 		return new Enemy(x,y);
@@ -119,6 +126,14 @@ public class Enemy {
 		else{
 			return false;
 		}	}
+	public void setHealth(int health){
+		if(this.health-health<=0){
+			this.health=0;
+		}
+		else{
+			this.health -=health;
+		}
+	}
 	
 	
 }

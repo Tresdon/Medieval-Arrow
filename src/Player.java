@@ -84,6 +84,14 @@ public abstract class Player {
 			health += .1;
 		}
 	}
+	public void setHealth(int health){
+		if(this.health-health<=0){
+			this.health=0;
+		}
+		else{
+			this.health -=health;
+		}
+	}
 	public void setWalking(boolean val){
 		walking = val;
 	}
