@@ -4,8 +4,21 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
 
+/**
+ * 
+ * @author Created by Jason Komoda, Chris Tracy, and Tresdon Jones, students at DU. For their final project in COMP 2673
+ * 
+ * Represents a specific class of character that the player could play.
+ *
+ */
 public class Archer extends Player {
-
+	
+/**
+ * constructor that creates an archer using different sprites
+ * @param x - value of archer's x coordinate
+ * @param y - value of archer's y coordinate
+ * @throws SlickException - exception that specifies the issue is related to slick2d game library
+ */
 	public Archer(int x, int y) throws SlickException {
 		super(x, y);
 		moveDownAnim = new Animation(

@@ -3,9 +3,21 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.SpriteSheet;
 
-
+/**
+ * 
+ * @author Created by Jason Komoda, Chris Tracy, and Tresdon Jones, students at DU. For their final project in COMP 2673
+ * 
+ * Represents a skeleton, a specific enemy that the player can fight.
+ *
+ */
 public class Skeleton extends Enemy {
 
+	/**
+	 * constructor that creates a new enemy skeleton at a specified x and y coordinate
+	 * @param x - x value
+	 * @param y - y value
+	 * @throws SlickException - exception that specifies the issue is related to slick2d game library
+	 */
 	public Skeleton(int x, int y) throws SlickException {
 		super(x, y);
 		moveDownAnim = new Animation(

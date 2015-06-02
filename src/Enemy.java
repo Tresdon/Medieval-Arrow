@@ -5,6 +5,13 @@ import org.newdawn.slick.tiled.TiledMap;
 import java.util.Random;
 
 
+/**
+ * 
+ * @author Created by Jason Komoda, Chris Tracy, and Tresdon Jones, students at DU. For their final project in COMP 2673
+ * 
+ * Represents a generic enemy that the player can fight.
+ *
+ */
 public class Enemy {
 	private int y,x;
 	private int health, maxHealth;
@@ -13,6 +20,12 @@ public class Enemy {
 	private static int WALKSPEED = 50;
 	private String direction="right";
 	private Random rand;
+	
+	/**
+	 * constructor that creates a new enemy at a specified x and y coordinate
+	 * @param x - x value
+	 * @param y - y value
+	 */
 	public Enemy(int x,int y){
 		this.x=x;
 		this.y=y;
@@ -20,6 +33,12 @@ public class Enemy {
 		maxHealth = 15;
 		rand = new Random();
 	}
+	
+	/**
+	 * creates a way for the enemy to attack
+	 * @return - an enemy projectile
+	 * @throws SlickException
+	 */
 	public Projectile attack() throws SlickException{
 			Projectile proj = new Projectile(x,y,direction);
 			switch(direction){
@@ -30,44 +49,87 @@ public class Enemy {
 			}
 			return proj;
 	}
+	
+	/**
+	 * enemy walks right
+	 */
 	public void moveRight(){
 		x+=WALKSPEED;
 		animation = moveRightAnim;
 		direction = "right";
 	}
+	
+	/**
+	 * enemy walks left
+	 */
 	public void moveLeft(){
 		x-=WALKSPEED;
 		animation = moveLeftAnim;
 		direction = "left";
 	}
+	
+	/**
+	 * enemy walks down
+	 */
 	public void moveDown(){
 		y+=WALKSPEED;
 		animation = moveDownAnim;
 		direction = "down";
 
 	}
+	
+	/**
+	 * enemy walks up
+	 */
 	public void moveUp(){
 		y-=WALKSPEED;
 		animation = moveUpAnim;
 		direction = "up";
 	}
 	
+	/**
+	 * gets the x coordinate of the enemy
+	 * @return - x value
+	 */
 	public int getX(){
 		return x;
 	}
+	
+	/**
+	 * gets the health of the enemy
+	 * @return - enemy's health value
+	 */
 	public double getHealth(){
 		return health;
 	}
+	
+	/**
+	 * gets the max health of the enemy
+	 * @return - enemy's max health value
+	 */
 	public double getMaxHealth(){
 		return maxHealth;
 	}
+	
+	/**
+	 * gets the y coordinate of the enemy
+	 * @return - y value
+	 */
 	public int getY(){
 		return y;
 	}
+	
+	/**
+	 * gets the animation of the enemy
+	 * @return - enemy's animation
+	 */
 	public Animation getAnimation(){
 		return animation;
 	}
 
+	/**
+	 * creates random movement for the enemy
+	 */
 	public void randomMovement() {
 	
 		int num = rand.nextInt(1000);
@@ -84,17 +146,37 @@ public class Enemy {
 			checkDown(GameState.dungeon);
 		}
 	}
+	
+	/**
+	 * creates random attacks for the enemy
+	 * @return - random number
+	 * @throws SlickException - exception that specifies the issue is related to slick2d game library
+	 */
 	public int randomAttack() throws SlickException{
-		int num = rand.nextInt(300);
+		int num = rand.nextInt(100);
 		return num;
 	
 	}
+	
+	/**
+	 * creates a new enemy at the specified location
+	 * @param x - x coordinate
+	 * @param y - y coordinate
+	 * @return
+	 */
 	public static Enemy factory(int x, int y){
 		return new Enemy(x,y);
 	}
+	
 	public String toString(){
 		return "X: " +x +"Y: "+ y;
 	}
+	
+	/**
+	 * checks if there is space to the right of the enemy
+	 * @param dungeon - map of tiles
+	 * @return - true if there is space, false otherwise
+	 */
 	public boolean checkRight(TiledMap dungeon){
 		int wallLayer = dungeon.getLayerIndex("wall");
 		if(dungeon.getTileId((x/50)+1,(y/50),wallLayer)==0){
@@ -104,6 +186,12 @@ public class Enemy {
 		else{
 			return false;
 		}	}
+	
+	/**
+	 * checks if there is space above the enemy
+	 * @param dungeon - map of tiles
+	 * @return - true if there is space, false otherwise
+	 */
 	public boolean checkUp(TiledMap dungeon){
 		int wallLayer = dungeon.getLayerIndex("wall");
 		if(dungeon.getTileId((x/50),(y/50)-1,wallLayer)==0){
@@ -114,6 +202,12 @@ public class Enemy {
 			return false;
 		}
 	}
+	
+	/**
+	 * checks if there is space below the enemy
+	 * @param dungeon - map of tiles
+	 * @return - true if there is space, false otherwise
+	 */
 	public boolean checkDown(TiledMap dungeon){
 		int wallLayer = dungeon.getLayerIndex("wall");
 		if(dungeon.getTileId((x/50),(y/50)+1,wallLayer)==0){
@@ -123,6 +217,12 @@ public class Enemy {
 		else{
 			return false;
 		}	}
+	
+	/**
+	 * checks if there is space to the left of the enemy
+	 * @param dungeon - map of tiles
+	 * @return - true if there is space, false otherwise
+	 */
 	public boolean checkLeft(TiledMap dungeon){
 		int wallLayer = dungeon.getLayerIndex("wall");
 		if(dungeon.getTileId((x/50)-1,(y/50),wallLayer)==0){
@@ -132,6 +232,11 @@ public class Enemy {
 		else{
 			return false;
 		}	}
+	
+	/**
+	 * sets the health of the enemy
+	 * @param health - specified value of health
+	 */
 	public void setHealth(int health){
 		if(this.health-health<=0){
 			this.health=0;

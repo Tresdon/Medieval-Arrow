@@ -1,7 +1,5 @@
 import java.awt.Font;
 import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -13,9 +11,18 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.tiled.TiledMap;
 
-
+/**
+ * 
+ * @author Created by Jason Komoda, Chris Tracy, and Tresdon Jones, students at DU. For their final project in COMP 2673
+ * 
+ * The basic game state used throughout the game.
+ *
+ */
 public class GameState extends BasicGameState {
 
+	/**
+	 * declares some variables and data structures to hold the game's data
+	 */
 	public static TiledMap dungeon;
 	private Player player;
 	private Camera camera;
@@ -28,16 +35,20 @@ public class GameState extends BasicGameState {
 	private Input keyboard;
 	private TrueTypeFont font;
 	private boolean gameOver = false;
+	
 	@Override
+	/**
+	 * Initializes some of the data structures and variables.
+	 */
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		dungeon = new TiledMap("res/dungeon-one.tmx");
 		keyboard = gc.getInput();
 		keyboard.enableKeyRepeat();
 		wallLayer = dungeon.getLayerIndex("wall");
 		healthLayer = dungeon.getLayerIndex("health");
-		//Music music = new Music("res/music.ogg");
-		//music.play();
-		//music.setVolume((float)0.3);
+		Music music = new Music("res/music.ogg");
+		music.play();
+		music.setVolume((float)0.3);
 		camera = new Camera(-400,-200);
 		player = new Archer(200,200);
 		enemies = new ArrayList<Skeleton>();
@@ -60,6 +71,9 @@ public class GameState extends BasicGameState {
 	}
 
 	@Override
+	/**
+	 * Takes care of anything in the game that has to do with drawing. 
+	 */
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)	throws SlickException {
 		g.translate(camera.getX(), camera.getY());
 		dungeon.render(0,0);
@@ -116,6 +130,9 @@ public class GameState extends BasicGameState {
 	}
 
 	@Override
+	/**
+	 * adjusts the game/ handles logic on a clock.
+	 */
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 		
 		Projectile.checkVisible(enemyProjectiles);
