@@ -24,6 +24,26 @@ public class Archer extends Player {
 				new SpriteSheet(
 				new Image("res/archer/walkRight.png"),
 				64,64),100);
+		shootDownAnim = new Animation(
+				new SpriteSheet(
+				new Image("res/archer/shootDown.png"),
+				64,64),50);
+		shootLeftAnim = new Animation(
+				new SpriteSheet(
+				new Image("res/archer/shootLeft.png"),
+				64,64),50);
+		shootUpAnim = new Animation(
+				new SpriteSheet(
+				new Image("res/archer/shootUp.png"),
+				64,64),50);
+		shootRightAnim = new Animation(
+				new SpriteSheet(
+				new Image("res/archer/shootRight.png"),
+				64,64),50);
+		deadAnim = new Animation(
+				new SpriteSheet(
+				new Image("res/archer/dieStill.png"),
+				63,53),50);		
 		animation = moveRightAnim;		
 		
 		rightIdle = new Image("res/archer/idleRight.png");

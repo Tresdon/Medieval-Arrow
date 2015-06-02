@@ -24,6 +24,22 @@ public class Skeleton extends Enemy {
 				new SpriteSheet(
 				new Image("res/skeleton/walkRight.png"),
 				64,64),100);
+		shootDownAnim = new Animation(
+				new SpriteSheet(
+				new Image("res/skeleton/shootDown.png"),
+				64,64),50);
+		shootLeftAnim = new Animation(
+				new SpriteSheet(
+				new Image("res/skeleton/shootLeft.png"),
+				64,64),50);
+		shootUpAnim = new Animation(
+				new SpriteSheet(
+				new Image("res/skeleton/shootUp.png"),
+				64,64),50);
+		shootRightAnim = new Animation(
+				new SpriteSheet(
+				new Image("res/skeleton/shootRight.png"),
+				64,64),50);
 		animation = moveRightAnim;	
 	}
 

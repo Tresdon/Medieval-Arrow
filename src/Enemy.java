@@ -22,6 +22,12 @@ public class Enemy {
 	}
 	public Projectile attack() throws SlickException{
 			Projectile proj = new Projectile(x,y,direction);
+			switch(direction){
+		case "right": animation = shootRightAnim;break;
+		case "left"	: animation = shootLeftAnim;break;
+		case "up"	: animation = shootUpAnim;break;
+		case "down"	: animation = shootDownAnim;break;
+			}
 			return proj;
 	}
 	public void moveRight(){

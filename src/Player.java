@@ -7,16 +7,18 @@ public abstract class Player {
 
 	private double health, maxHealth;
 	private int x,y;
-	protected Animation moveRightAnim, moveLeftAnim, moveDownAnim, moveUpAnim, animation;
+	protected Animation moveRightAnim, moveLeftAnim, moveDownAnim, moveUpAnim, animation,
+	shootRightAnim, shootLeftAnim, shootDownAnim, shootUpAnim, deadAnim;
 	protected Image idle, rightIdle, downIdle, upIdle, leftIdle;
 	protected String direction;
 	private boolean walking=false;
+	private boolean dead = false;
 	private static int WALKSPEED = 50;
 
 	public Player(int x, int y){
 		this.x = x;
 		this.y = y;
-		health = 30;
+		health = 100;
 		maxHealth = 100;
 		walking = false;
 		direction = "right";
@@ -24,39 +26,44 @@ public abstract class Player {
 
 	public Projectile attack() throws SlickException{
 		Projectile proj = new Projectile(x,y,direction);
+		switch(direction){
+		case "right": animation = shootRightAnim;break;
+		case "left"	: animation = shootLeftAnim;break;
+		case "up"	: animation = shootUpAnim;break;
+		case "down"	: animation = shootDownAnim;break;
+		}
 		return proj;
 	}
 
 	public void moveRight(){
-		walking = true;
-		x+=WALKSPEED;
-		animation = moveRightAnim;
-		direction = "right";
-		idle = rightIdle;
+			walking = true;
+			x+=WALKSPEED;
+			animation = moveRightAnim;
+			direction = "right";
+			idle = rightIdle;
 	}
 	public void moveLeft(){
-		walking = true;
-		x-=WALKSPEED;
-		animation = moveLeftAnim;
-		direction = "left";
-		idle = leftIdle;
+			walking = true;
+			x-=WALKSPEED;
+			animation = moveLeftAnim;
+			direction = "left";
+			idle = leftIdle;
 	}
 	public void moveDown(){
-		walking = true;
-		y+=WALKSPEED;
-		animation = moveDownAnim;
-		direction = "down";
-		idle = downIdle;
-
+			walking = true;
+			y+=WALKSPEED;
+			animation = moveDownAnim;
+			direction = "down";
+			idle = downIdle;
 	}
 	public void moveUp(){
-		walking = true;
-		y-=WALKSPEED;
-		animation = moveUpAnim;
-		direction = "up";
-		idle = upIdle;
+			walking = true;
+			y-=WALKSPEED;
+			animation = moveUpAnim;
+			direction = "up";
+			idle = upIdle;
 	}
-	
+
 	public int getX(){
 		return x;
 	}
@@ -78,7 +85,7 @@ public abstract class Player {
 	public boolean isWalking(){
 		return walking;
 	}
-	
+
 	public void heal(){
 		if(health<maxHealth){
 			health += .1;
@@ -94,6 +101,15 @@ public abstract class Player {
 	}
 	public void setWalking(boolean val){
 		walking = val;
+	}
+	public void setDead(boolean val){
+		dead = val;
+	}
+	public boolean getDead(){
+		return dead;
+	}
+	public void die(){
+		animation = deadAnim;
 	}
 
 

@@ -44,12 +44,16 @@ public class GameState extends BasicGameState {
 		projectiles = new ArrayList<Projectile>();
 		enemyProjectiles = new ArrayList<Projectile>();
 		for(int i =1 ; i<10 ; i++){
-			enemies.add(new Skeleton(i*50,i*50));
+			enemies.add(new Skeleton(i*200,i*200));
 		}
-		 // load a default java font
-	    Font awtFont = new Font("Times New Roman", Font.BOLD, 40);
-	    font = new TrueTypeFont(awtFont, false);
-	    
+		for(int i =1 ; i<5 ; i++){
+			enemies.add(new Skeleton(i*300,i*300));
+		}
+
+		// load a default java font
+		Font awtFont = new Font("Times New Roman", Font.BOLD, 40);
+		font = new TrueTypeFont(awtFont, false);
+
 
 
 	}
@@ -104,8 +108,8 @@ public class GameState extends BasicGameState {
 			}
 		}
 		if(gameOver){
-			g.drawString("YOU LOSE",player.getX(),player.getY());
-			
+			g.drawString("YOU LOSE",player.getX(),player.getY()-100);
+
 		}
 
 	}
@@ -119,7 +123,7 @@ public class GameState extends BasicGameState {
 				enemyProjectiles.add(enemies.get(i).attack());
 			}
 		}
-		
+
 		//Check Player Input
 		if(keyboard.isKeyPressed(Input.KEY_ESCAPE)){
 			gc.exit();
@@ -127,29 +131,34 @@ public class GameState extends BasicGameState {
 		if(keyboard.isKeyPressed(Input.KEY_SPACE)){
 			projectiles.add(player.attack());
 		}
-		if(keyboard.isKeyPressed(Input.KEY_W)){
-			if(dungeon.getTileId(((int)player.getX()/50),((int)player.getY()/50)-1,wallLayer)==0){
-				player.moveUp();
-				camera.moveUp();
+		if(!player.getDead()){
+			if(keyboard.isKeyPressed(Input.KEY_W)){
+				if(dungeon.getTileId(((int)player.getX()/50),((int)player.getY()/50)-1,wallLayer)==0){
+					player.moveUp();
+					camera.moveUp();
+				}
+			}
+			else if(keyboard.isKeyPressed(Input.KEY_A)){
+				if(dungeon.getTileId(((int)player.getX()/50)-1,(int)player.getY()/50,wallLayer)==0){
+					player.moveLeft();
+					camera.moveLeft();
+				}	
+			}
+			else if(keyboard.isKeyPressed(Input.KEY_S)){
+				if(dungeon.getTileId((int)player.getX()/50,((int)player.getY())/50+1,wallLayer)==0){
+					player.moveDown();
+					camera.moveDown();
+				}		
+			}
+			else if(keyboard.isKeyPressed(Input.KEY_D)){
+				if(dungeon.getTileId(((int)player.getX()/50)+1,(int)player.getY()/50,wallLayer)==0){
+					player.moveRight();
+					camera.moveRight();
+				}		
 			}
 		}
-		else if(keyboard.isKeyPressed(Input.KEY_A)){
-			if(dungeon.getTileId(((int)player.getX()/50)-1,(int)player.getY()/50,wallLayer)==0){
-				player.moveLeft();
-				camera.moveLeft();
-			}	
-		}
-		else if(keyboard.isKeyPressed(Input.KEY_S)){
-			if(dungeon.getTileId((int)player.getX()/50,((int)player.getY())/50+1,wallLayer)==0){
-				player.moveDown();
-				camera.moveDown();
-			}		
-		}
-		else if(keyboard.isKeyPressed(Input.KEY_D)){
-			if(dungeon.getTileId(((int)player.getX()/50)+1,(int)player.getY()/50,wallLayer)==0){
-				player.moveRight();
-				camera.moveRight();
-			}		
+		else{
+			player.die();
 		}
 
 
@@ -169,15 +178,16 @@ public class GameState extends BasicGameState {
 					}
 				}
 			}
-		for(Projectile proj : enemyProjectiles){
-			if(proj.hitPlayer(player)){
-				player.setHealth(1);
+			for(Projectile proj : enemyProjectiles){
+				if(proj.hitPlayer(player)){
+					player.setHealth(1);
+				}
 			}
-		}
-		
-		if(player.getHealth()==0){
-			gameOver = true;
-		}
+
+			if(player.getHealth()==0){
+				gameOver = true;
+				player.setDead(true);
+			}
 
 		}
 

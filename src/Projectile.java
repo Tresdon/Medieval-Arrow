@@ -6,9 +6,8 @@ public class Projectile {
 	private double myX;
 	private double myY;
 	private String direction;
-	private static double mySpeed=.02;
+	private static double mySpeed=.04;
 	private Image image;
-	private boolean isVisible;
 
 	public Projectile(double startX, double startY,String dir) throws SlickException{
 		image = new Image("res/arrow.png");
@@ -21,7 +20,6 @@ public class Projectile {
 		case "up"	: image.setRotation(-45);break;
 		case "down"	: image.setRotation(135);break;
 		}
-		isVisible = true;
 	}
 
 	public boolean hitPlayer(Player aPlayer){
