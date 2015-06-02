@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -5,14 +7,18 @@ import org.newdawn.slick.SlickException;
 public class Projectile {
 	private double myX;
 	private double myY;
+	private double origX;
+	private double origY;
 	private String direction;
-	private static double mySpeed=.04;
+	private static double mySpeed=.05;
 	private Image image;
-
+	
 	public Projectile(double startX, double startY,String dir) throws SlickException{
 		image = new Image("res/arrow.png");
 		myX = startX;
 		myY = startY;
+		origX = startX;
+		origY = startY;
 		direction = dir;
 		switch(direction){
 		case "right": image.setRotation(45);break;
@@ -38,6 +44,18 @@ public class Projectile {
 		}
 		return false;
 	}
+	
+	public static void checkVisible(ArrayList<Projectile> projectiles){
+		ArrayList<Projectile> projectilesCopy = new ArrayList<Projectile>(projectiles);
+		for(Projectile proj: projectilesCopy){
+			if(proj.myX>proj.origX+300&&proj.direction.equals("right")||
+					proj.myX<proj.origX-300&&proj.direction.equals("left")||
+					proj.myY>proj.origY+300&&proj.direction.equals("down")||
+					proj.myY<proj.origY-300&&proj.direction.equals("up")){
+				projectiles.remove(proj);
+			}
+		}
+	}
 
 	public double getX(){
 		return myX;
@@ -57,4 +75,5 @@ public class Projectile {
 		case "down"	: myY+=mySpeed;break;
 		}
 	}
+	
 }

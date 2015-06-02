@@ -88,7 +88,7 @@ public abstract class Player {
 
 	public void heal(){
 		if(health<maxHealth){
-			health += .1;
+			health += 1;
 		}
 	}
 	public void setHealth(int health){
@@ -110,6 +110,9 @@ public abstract class Player {
 	}
 	public void die(){
 		animation = deadAnim;
+	}
+	public void setDirection(String str){
+		direction = str;
 	}
 
 

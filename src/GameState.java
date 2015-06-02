@@ -38,11 +38,12 @@ public class GameState extends BasicGameState {
 		//Music music = new Music("res/music.ogg");
 		//music.play();
 		//music.setVolume((float)0.3);
-		camera = new Camera(-600,-400);
+		camera = new Camera(-400,-200);
 		player = new Archer(200,200);
 		enemies = new ArrayList<Skeleton>();
 		projectiles = new ArrayList<Projectile>();
 		enemyProjectiles = new ArrayList<Projectile>();
+		
 		for(int i =1 ; i<10 ; i++){
 			enemies.add(new Skeleton(i*200,i*200));
 		}
@@ -116,6 +117,9 @@ public class GameState extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+		
+		Projectile.checkVisible(enemyProjectiles);
+		Projectile.checkVisible(projectiles);
 		//handle enemies
 		for(int i = 0;i<enemies.size();i++){
 			enemies.get(i).randomMovement();
@@ -133,24 +137,29 @@ public class GameState extends BasicGameState {
 		}
 		if(!player.getDead()){
 			if(keyboard.isKeyPressed(Input.KEY_W)){
+				player.setDirection("up");
 				if(dungeon.getTileId(((int)player.getX()/50),((int)player.getY()/50)-1,wallLayer)==0){
 					player.moveUp();
 					camera.moveUp();
 				}
 			}
 			else if(keyboard.isKeyPressed(Input.KEY_A)){
+				player.setDirection("left");
 				if(dungeon.getTileId(((int)player.getX()/50)-1,(int)player.getY()/50,wallLayer)==0){
 					player.moveLeft();
 					camera.moveLeft();
 				}	
 			}
 			else if(keyboard.isKeyPressed(Input.KEY_S)){
+				player.setDirection("down");
 				if(dungeon.getTileId((int)player.getX()/50,((int)player.getY())/50+1,wallLayer)==0){
 					player.moveDown();
 					camera.moveDown();
 				}		
 			}
-			else if(keyboard.isKeyPressed(Input.KEY_D)){
+			else if(keyboard.isKeyPressed(Input.KEY_D)
+					){
+				player.setDirection("right");
 				if(dungeon.getTileId(((int)player.getX()/50)+1,(int)player.getY()/50,wallLayer)==0){
 					player.moveRight();
 					camera.moveRight();
@@ -180,7 +189,7 @@ public class GameState extends BasicGameState {
 			}
 			for(Projectile proj : enemyProjectiles){
 				if(proj.hitPlayer(player)){
-					player.setHealth(1);
+					player.setHealth(2);
 				}
 			}
 
