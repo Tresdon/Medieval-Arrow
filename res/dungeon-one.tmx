@@ -9,17 +9,17 @@
  <tileset firstgid="3" name="health" tilewidth="50" tileheight="50">
   <image source="items/health.jpg" width="50" height="50"/>
  </tileset>
- <layer name="background" width="60" height="60">
+ <layer name="background" width="60" height="60" visible="0">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3RwQkAAAgDser+Q7uFiOSRf49WkgIAAAAAAAAAAGBVH9igV69evfgXAAD4bQApZNNsQDgAAA==
+   H4sIAAAAAAAAC+3DAQkAAAwEofv+pddjKLhqqqqqqqqqqqqqqqqqquqrB41l5KJAOAAA
   </data>
  </layer>
  <layer name="wall" width="60" height="60">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+VV2YoEQQjrmf//6GUfFgYxmkT7GFYoug61kvLo93Ec7382HGHtkN6b0EF2b3Ie/ap8M4zON95bvf0kJlNfETurq9xT5d40b6+M74a4WP/WG3w73a18dt6NqenO/vOb7THxzfhW80mOZO/q2irfyXyD7x35HPNL9eUIqhul57n5fFd845u7fphvhyHqXlW/ToynI+JgdF2+VY4y9t8iXXwZ+62h+HQF8b1CmJrt7Nw7t+JT1XTEynDM+t4T4pvZod6KchjZb3FGdRPXbFynWLI5a+PobvBFdyjxRXbZmdMPo60jm/XrYK8wob0KK9ObVHFyONPd4NvpRX01t5h+hYTF2Z2z+ezmfOfzqhHvixiORG+CE/k5wt7Z64ovslflDl7Z+m+PiS/yo8zZ+rsyvg6eTqb97ax6PsK6im9Xn8j/3eLUr8u3Wl8V02n9MtLVb3fHZJ5hmNSvMn8iXya+SJCew3dbGL4Iy6R2OjyKsLGe1q8rk3xGPRHpxznbIxkdNc4O3+xswnciTP9m+KK3OZNvhbWLl7pWzrbzuboXYen8VjjYO7Kzbb5s3W3zvSOfERZlX/WTnWUx+JyrfYeJL9Lt3srtV2jN9AVmIBxqn1FG5Yc9Y2sks5nk86+8yPs6P9P+zN6t5nP8vorzao7wMHabfBn/St5u8K10VRxqn2PE5btR652Nks8VNlRXbnzRXQgjwhnnTj5/StavtvkyNlWPiV+2P19Rv11uZTaMnFm/2T1xjvTcvsXaonzu+kcXU2a/q80rB3oXplds5QvCMfW5ge9svlXPVH1W/YVZd3rdPjpzemsnSj/sfCj1zpyd0Uc34pvZIl/qW2R+JrL5phXf7K7u7Mn1G31uSMbxCfE9m++m781/9reMH9Razl9AOAAA
+   H4sIAAAAAAAAC+VVWa7EMAirev9Dv6+RRgiDbegyekhRswCxw9LzOI7znw1HWDukdxI6yO4k59GvyjfD6HzjvdXbT2Iy9RWxs7rKPVXuTfP2zvhuiIv1s97g2+lu5bPzbkxNd/bf32yPiW/Gt5pPciR7V9dW+U7mG3yfyOeYX6ovR1DdKD3Pzeen4hvf3PXDfDsMUfeu+nViPB0RB6Pr8q1ylLH/Feniy9hvDcWnK4jvHcLUbGfn3rkVn6qmI1aGY9b33hDfzA71VpTDyH6LM6qbuGbjOsWSzVkbR3eDL7pDiS+yy86cfhhtHdmsXwd7hQntVViZ3qSKk8OZ7gbfTi/qq7nF9CskLM7unM1nN+c7n3eNeF/EcCR6E5zIzxH2rl5XfJG9Kk/wytafPSa+yI8yZ+vvzvg6eDqZ9rer6vkI6yq+XX0i/0+LU78u32p9V0yn9ctIV7/dHZN5hmFSv8r8jXyZ+CJBeg7fbWH4IiyT2unwKMLGelq/rkzyGfVEpB/nbI9kdNQ4O3yzswnfiTD9m+GL3uZKvhXWLl7qWjnbzufqXoSl81vhYO/Izrb5snW3zfeJfEZYlH3VT3aWxeB7rvYdJr5It3srt1+hNdMXmIFwqH1GGZUf9oytkcxmks+qXNmf2bvVfFa+1RzhYew2+TL+lbzd4FvpqjjUPseIy3ej1jsbJZ8rbKiu3PiiuxBGhDPOnXzuZJuvcg/zZfvzHfXb5VZmw8iV9ZvdE+dIz+1brC3K565/dDFl9rvavHOgd2F6xVa+IBxTnxv4ruar9szKZ9VfmHWn1+2jM6e3dqL0w86HUu/M2RV9dCO+mS3ypb5F5mcim29a8c3u6s7eXL/R54ZkHN8Q36v5bvre/Gf/yvgD/o5ewkA4AAA=
   </data>
  </layer>
- <layer name="health" width="60" height="60">
+ <layer name="health" width="60" height="60" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3WsQkAAAzDsED//7lLfwgU6QKPTuCfaQcAAMDxpgAAAAAAAAAAAAC0LPlPQoFAOAAA
   </data>

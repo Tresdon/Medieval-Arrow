@@ -85,7 +85,7 @@ public class Enemy {
 		}
 	}
 	public int randomAttack() throws SlickException{
-		int num = rand.nextInt(100);
+		int num = rand.nextInt(300);
 		return num;
 	
 	}

@@ -13,10 +13,7 @@ public class DungeonCrawlingGame extends StateBasedGame {
 		app.setDisplayMode(app.getScreenWidth(),app.getScreenHeight(),true);
 		app.setIcon("res/icons/32x32.png");
 		app.start();
-		app.setShowFPS(false);
-
-		
-		
+		app.setShowFPS(false);		
 	}
 
 	@Override
